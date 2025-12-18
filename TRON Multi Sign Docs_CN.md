@@ -393,8 +393,8 @@ GET /openapi/multi/list
 | address       | string        | tron链的58地址，表示当前接口请求的当前账户地址              |
 | channel       | string        | 表示请求项目方名称, 申请时项目方自己的定的项目名称（eg:tronlink） |
 | uuid          | string        | 表示当前请求唯一id,请求时随机一个                      |
-| secret_id     | string        | 跟tronlink约定的项目唯一标识                      |
-| sign          | string        | 接口签名，tronlink校验请求是否合法                   |
+| secret_id     | string        | 跟多签服务约定的项目唯一标识                          |
+| sign          | string        | 接口签名，多签服务校验请求是否合法                       |
 ---------------------------------------------------------------------------
 
 ## 二、API 请求签名（sign）生成规则
@@ -430,7 +430,7 @@ GET/api/wallet/v2/auth?address=TMf7fBmKPDGVP8b6UrEu1t6oDBRnNgwTt7&channel=tronli
 
 ### **3.1 申请方式**
 
-Tronlink的官方运营人员会提供一个申请[google doc链接](https://docs.google.com/forms/d/e/1FAIpQLSc5EB1X8JN7LA4SAVAG99VziXEY6Kv6JxmlBry9rUBlwI-GaQ/viewform?pli=1)，项目在google
+多签服务的官方运营人员会提供一个申请[google doc链接](https://docs.google.com/forms/d/e/1FAIpQLSc5EB1X8JN7LA4SAVAG99VziXEY6Kv6JxmlBry9rUBlwI-GaQ/viewform?pli=1)，项目在google
 doc上留下项目名称，项目信息以及联系用的邮箱地址。
 
 ### **3.2 响应内容**
