@@ -70,7 +70,7 @@ GET /openapi/multi/auth (非必要的，用户可以自己输入自己控制的�
   -------------------------------------------------------------------------
 
 ### 返回示例
-```
+```json
 {
     "code": 0,
     "message": "OK",
@@ -112,10 +112,10 @@ POST /openapi/multi/transaction
 
 ### 请求体示例
 
-```
+```json
 {
     "address": "TE4CeJSjLmBsXQva3F1HXvAbdAP71Q2Ucw",
-    "function_selector":"transfer(address,uint256)",  //交易是触发智能合约时，这里是真实的智能合约的方法。方便解析parameter的数据
+    "function_selector":"transfer(address,uint256)",  // 交易是触发智能合约时，这里是真实的智能合约的方法。方便解析parameter的数据
     "transaction": {    // 构造的要上链的真实交易体。
         "raw_data": {
             "ref_block_bytes": "ded4",
@@ -188,7 +188,7 @@ WebSocket
 
 ### 客户端请求示例
 
-```
+```json
 {
     "address": "TW6omSrQ1ZK37SwSvTQD5Cnp2QbEX2zDVZ"，// 订阅待签名交易； 订阅交易状态更新 
     "version":"v1"
@@ -197,7 +197,7 @@ WebSocket
 
 ## 服务端响应示例
 
-```
+```json
 [
     {
         "hash": "18213ab5b1d277b4090f647b925952efe972facd19462101f3d94a58b8354c23",
@@ -302,7 +302,7 @@ GET /openapi/multi/list
 
 ## 返回示例
 
-```
+```json
 {
     "code": 0,
     "message": "OK",

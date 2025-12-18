@@ -171,7 +171,7 @@ WebSocket
 
 ### Response Example
 
-```
+```json
 {
     "address": "TW6omSrQ1ZK37SwSvTQD5Cnp2QbEX2zDVZ"，// Subscribe to pending transactions awaiting signature; subscribe to transaction status updates.
     "version":"v1"
@@ -180,7 +180,7 @@ WebSocket
 
 ### Response Example
 
-```
+```json
 [
     {
         "hash": "18213ab5b1d277b4090f647b925952efe972facd19462101f3d94a58b8354c23",
@@ -282,7 +282,8 @@ GET /openapi/multi/list
 ------------------------------------------------------------------------------
 
 ### Response Example
-```
+
+```json
 {
     "code": 0,
     "message": "OK",
