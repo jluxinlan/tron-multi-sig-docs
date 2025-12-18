@@ -401,8 +401,7 @@ GET /openapi/multi/list
 
 ### **2.1 签名参数排序**
 
-将公共请求头参数（除 sign 外）按字段名 ASCII
-码升序排列，拼接为key=value格式的字符串，参数间以&连接。
+将公共请求头参数（除 sign 外）按字段名 ASCII 码升序排列，拼接为key=value格式的字符串，参数间以&连接。
 
 示例：
 
@@ -417,7 +416,7 @@ address=TMf7fBmKPDGVP8b6UrEu1t6oDBRnNgwTt7&channel=tronlink&secret_id=3d717E2596
 示例（GET 请求，WebSocket是GET请求）：
 
 ```
-GET/api/wallet/v2/auth?address=TMf7fBmKPDGVP8b6UrEu1t6oDBRnNgwTt7&channel=tronlink&secret_id=3d717E259617EA528F8&&sign_version=v1&ts=174592188000&uuid=a6e4563f-1ce4-4a8f-ba37-de1cc121b4f8
+GET/openapi/multi/auth?address=TMf7fBmKPDGVP8b6UrEu1t6oDBRnNgwTt7&channel=tronlink&secret_id=3d717E259617EA528F8&&sign_version=v1&ts=174592188000&uuid=a6e4563f-1ce4-4a8f-ba37-de1cc121b4f8
 ```
 
 ### **2.3 生成签名值**
@@ -430,8 +429,7 @@ GET/api/wallet/v2/auth?address=TMf7fBmKPDGVP8b6UrEu1t6oDBRnNgwTt7&channel=tronli
 
 ### **3.1 申请方式**
 
-多签服务的官方运营人员会提供一个申请[google doc链接](https://docs.google.com/forms/d/e/1FAIpQLSc5EB1X8JN7LA4SAVAG99VziXEY6Kv6JxmlBry9rUBlwI-GaQ/viewform?pli=1)，项目在google
-doc上留下项目名称，项目信息以及联系用的邮箱地址。
+多签服务的官方运营人员会提供一个申请[google doc链接](https://docs.google.com/forms/d/e/1FAIpQLSc5EB1X8JN7LA4SAVAG99VziXEY6Kv6JxmlBry9rUBlwI-GaQ/viewform?pli=1)，项目在google doc上留下项目名称，项目信息以及联系用的邮箱地址。
 
 ### **3.2 响应内容**
 
