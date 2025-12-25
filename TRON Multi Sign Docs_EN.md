@@ -1,8 +1,16 @@
-# Developer Guide for Integrating TRON Multisignature Wallets
+# Developer Guide: Integrating TRON Multisig Service for Wallets
 
 ## Overview of the Multisignature Service
 
-The TRON multisignature service allows users to submit an initial transaction and guides multiple participants to sign asynchronously. Once the accumulated signature weight meets the predefined threshold, the system automatically broadcasts the transaction, simplifying complex multisignature workflows.
+The TRON Multi-Signature Service is an application-layer multi-signature transaction service designed to manage permission verification, signature workflows, and execution control for multi-signature transactions without accessing private keys.
+
+Developers can submit a pending on-chain transaction through this service. Based on the pre-configured multi-signature permission rules of the account, the service collects and validates signatures from multiple participants and advances the multi-signature workflow asynchronously. Once the accumulated signature weight meets the threshold defined by the on-chain account, the system automatically broadcasts the transaction to the blockchain and completes its execution.
+
+The TRON Multi-Signature Service does not custody, generate, or use private keys. It is positioned as a keyless multi-signature transaction orchestration hub.
+
+## Core Value
+
+The service standardizes multi-signature workflows by supporting asynchronous signature collection and state management. It automatically evaluates signature weights and execution conditions, eliminating the need for application developers to reimplement complex multi-signature logic. This enables rapid integration and scalable support for multi-signature transactions.
 
 ## Multisignature Transaction Flow
 
@@ -442,10 +450,23 @@ After approval, an email containing the following information will be sent:
 ```
 channel: AAAA (project name of the requester)
 
-secretID: SSSSSS (unique project identifier)
+secret_id: SSSSSS (unique project identifier)
 
-secretKey: CCCCCCCC (signature key, must be kept secure)
+secret_key: CCCCCCCC (signature key, must be kept secure)
 ```
+
+### **3.3 Notes**
+To facilitate integration testing for teams, a set of test credentials is provided.
+Please note that these credentials are subject to QPS limits and must not be used for high-frequency requests.
+```
+channel: test
+secret_id: TEST
+secret_key: TESTTESTTEST
+```
+
+Mainnet Domain: api.walletadapter.org
+
+Nile Testnet Domain:  apinile.walletadapter.org
 
 ## IV. Security Considerations
 
