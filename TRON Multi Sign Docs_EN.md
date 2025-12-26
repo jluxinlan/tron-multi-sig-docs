@@ -22,7 +22,7 @@ You can call the `/openapi/multi/auth` endpoint to retrieve all addresses over w
 
 #### (2) Construct and Sign the Transaction
 
-Based on business requirements, the user constructs a transaction object (`Transaction`) using the `owner_address`, and then signs the transaction with the current address.
+Based on business requirements, construct a transaction object (`Transaction`) using the `owner_address`, and then sign the transaction with the current address.
 
 #### (3) Submit the Transaction
 
@@ -155,7 +155,7 @@ POST /openapi/multi/transaction
 | address               | string   | Address initiating the transaction                       |
 | function_selector     | string   | Smart contract method (required when invoking contracts) |
 | transaction.raw_data  | object   | Raw transaction data compliant with blockchain protocol  |
-| transaction.signature | array    | Signature list (signatures appended sequentially)        |
+| transaction.signature | array    | Signature array (signatures appended sequentially)       |
 
 ## 3. Pending Transaction Listener (WebSocket)
 
@@ -173,9 +173,10 @@ WebSocket
 
 ### Connection Flow
 
-1. Authentication: Client includes valid authentication parameters in the HTTP request URL.
-2. Connection establishment: After validation, the client sends the current operating address to subscribe.
-3. Data exchange: The server pushes pending transactions and transaction status updates.
+1. Authentication: The client includes valid authentication parameters in the HTTP request URL.(The format is specified by the server and you can refer to [[API Authentication Specification]](#api-authentication-specification) for details)
+2. Connection establishment: After validation, the client sends the current operating address for subscribe.
+3. Data exchange: The server pushes pending transactions and transaction status updates for the client to sign as required. Multisign transactions involving the current address will also be pushed. The front end will determine whether the transaction is pending signing.
+
 
 ### Response Example
 
@@ -269,13 +270,13 @@ GET /openapi/multi/list
 
 ### Request Parameters
 ---------------------------------------------------------------------------------------------------------------
-| **Parameter** | **Type** | **Required** | **Description**                                                                    |
-|:--------------|:---------|:-------------|:-----------------------------------------------------------------------------------|
-| address       | string   | Yes          | Current address                                                                    |
-| start         | int      | Yes          | Pagination start index (if limit=10, page 2 start=10)                              |
-| limit         | int      | Yes          | Pagination limit (max 100)                                                         |
-| is_sign       | boolean  | No           | Filter by own signature (true = signed; false = unsigned, default false)           |
-| state         | int      | Yes          | Filter by transaction status (0 = processing; 1 = success; 2 = failure; 255 = all) |
+| **Parameter** | **Type** | **Required** | **Description**                                                                                   |
+|:--------------|:---------|:-------------|:--------------------------------------------------------------------------------------------------|
+| address       | string   | Yes          | Current address                                                                                   |
+| start         | int      | Yes          | Pagination start index (if limit=10, then start=10 for Page 2 )                                   |
+| limit         | int      | Yes          | Pagination limit (max 100)                                                                        |
+| is_sign       | boolean  | No           | Filter by signed transactions of current address (true = signed; false = unsigned, default false) |
+| state         | int      | Yes          | Filter by transaction status (0 = processing; 1 = success; 2 = failure; 255 = all)                |
 ---------------------------------------------------------------------------------------------------------------
 
 ### Response Parameters
@@ -285,7 +286,7 @@ GET /openapi/multi/list
 | code             | int      | Status code                                                     |
 | message          | string   | Status message                                                  |
 | data.total       | int      | Total matching records                                          |
-| data.range_total | int      | Total in current page range                                     |
+| data.range_total | int      | Total records in current page range                             |
 | data.data        | array    | Array of transaction details (structure same as WebSocket push) |
 ------------------------------------------------------------------------------
 
@@ -393,15 +394,15 @@ GET /openapi/multi/list
 All API requests must include the following common request fields, which are used for identity authentication, version identification, and request tracing:
 
 ---------------------------------------------------------------------------
-| **Name**     | **Type** | **Default / Description**                                                   |
-|:-------------|:---------|:----------------------------------------------------------------------------|
-| sign_version | string   | v1, currently only v1 is supported                                          |
-| ts           | long     | Current timestamp in milliseconds                                           |
-| address      | string   | TRON Base58 address representing the requesting account                     |
-| channel      | string   | Project name of the requester (defined during application, e.g. tronlink)   |
-| uuid         | string   | Unique request ID, randomly generated per request                           |
-| secret_id    | string   | Unique project identifier agreed with the multisignature service            |
-| sign         | string   | API signature used by the multisignature service to verify request validity |
+| **Name**     | **Type** | **Default / Description**                                                                  |
+|:-------------|:---------|:-------------------------------------------------------------------------------------------|
+| sign_version | string   | v1, currently only v1 is supported                                                         |
+| ts           | long     | Current timestamp in milliseconds                                                          |
+| address      | string   | TRON Base58 address representing the requesting account                                    |
+| channel      | string   | Project name of the requester (defined by the requester during application, e.g. tronlink) |
+| uuid         | string   | Unique request ID, randomly generated per request                                          |
+| secret_id    | string   | Unique project identifier agreed with the multisignature service                           |
+| sign         | string   | API signature used by the multisignature service to verify request validity                |
 ---------------------------------------------------------------------------
 
 ## II. API Request Signature (`sign`) Generation Rules
